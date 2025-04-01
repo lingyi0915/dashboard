@@ -5,14 +5,6 @@ import plotly.express as px
 import requests
 
 
-# 获取市场数据（示例：Binance API）
-def get_market_data():
-    url = "https://api.binance.com/api/v3/ticker/24hr"
-    data = requests.get(url).json()
-    df = pd.DataFrame(data)
-    df = df[['symbol', 'lastPrice', 'priceChangePercent']]
-    return df
-
 
 # 生成模拟交易数据
 def generate_fake_trades():
@@ -55,13 +47,6 @@ def main():
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        st.subheader("市场数据监控")
-        market_data = get_market_data()
-        st.dataframe(market_data.head(10))
-
-        st.subheader("市场K线")
-        fig = px.line(market_data.head(10), x='symbol', y='lastPrice', title='市场价格变动')
-        st.plotly_chart(fig)
 
         st.subheader("近期收益曲线")
         trades_data = generate_fake_trades()
